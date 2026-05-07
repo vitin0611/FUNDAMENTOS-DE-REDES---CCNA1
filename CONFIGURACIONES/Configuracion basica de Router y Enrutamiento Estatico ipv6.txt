@@ -1,0 +1,120 @@
+enable
+configure terminal
+hostname HIGUEY
+ipv6 unicast-routing
+
+# Pool DHCPv6 para Estudiantes
+ipv6 dhcp pool POOL-ESTUDIANTES
+ address prefix 2003:BABA:506:1::/64
+ dns-server 2003:BABA:506:4::5
+ exit
+
+# Interfaz LAN - RED DE ESTUDIANTES
+interface GigabitEthernet0/0
+ ipv6 address 2003:BABA:506:1::1/64
+ ipv6 address FE80::1:1 link-local
+ ipv6 dhcp server POOL-ESTUDIANTES
+ ipv6 nd managed-config-flag
+ no shutdown
+ exit
+
+# Interfaz WAN hacia PUNTA_CANTA
+interface Serial0/0/0
+ ipv6 address 2003:BABA:506:A::1/64
+ ipv6 address FE80::A:1 link-local
+ no shutdown
+ exit
+
+# Enrutamiento Estático (Hacia todas las redes remotas)
+ipv6 route 2003:BABA:506:2::/64 2003:BABA:506:A::2
+ipv6 route 2003:BABA:506:3::/64 2003:BABA:506:A::2
+ipv6 route 2003:BABA:506:4::/64 2003:BABA:506:A::2
+ipv6 route 2003:BABA:506:B::/64 2003:BABA:506:A::2
+
+----------------------------------------------------------------
+
+enable
+configure terminal
+hostname PUNTA_CANA
+ipv6 unicast-routing
+
+# Pool DHCPv6 para Administrativa
+ipv6 dhcp pool POOL-ADMIN
+ address prefix 2003:BABA:506:2::/64
+ dns-server 2003:BABA:506:4::5
+ exit
+
+# Interfaz WAN hacia HIGUEY
+interface Serial0/0/0
+ ipv6 address 2003:BABA:506:A::2/64
+ ipv6 address FE80::A:2 link-local
+ no shutdown
+ exit
+
+# Interfaz LAN - RED ADMINISTRATIVA
+interface GigabitEthernet0/0
+ ipv6 address 2003:BABA:506:2::1/64
+ ipv6 address FE80::2:1 link-local
+ ipv6 dhcp server POOL-ADMIN
+ ipv6 nd managed-config-flag
+ no shutdown
+ exit
+
+# Interfaz WAN hacia SANTIAG
+interface Serial0/0/1
+ ipv6 address 2003:BABA:506:B::1/64
+ ipv6 address FE80::B:1 link-local
+ no shutdown
+ exit
+
+# Enrutamiento Estático
+ipv6 route 2003:BABA:506:1::/64 2003:BABA:506:A::1
+ipv6 route 2003:BABA:506:3::/64 2003:BABA:506:B::2
+ipv6 route 2003:BABA:506:4::/64 2003:BABA:506:B::2
+
+
+------------------------------------------------------------
+
+
+enable
+configure terminal
+ipv6 unicast-routing
+
+# Pools DHCPv6
+ipv6 dhcp pool POOL-PROFE
+ address prefix 2003:BABA:506:3::/64
+ exit
+
+ipv6 dhcp pool POOL-SERVICIOS
+ address prefix 2003:BABA:506:4::/64
+ exit
+
+# Interfaz WAN hacia PUNTA_CANTA
+interface Serial0/0/0
+ ipv6 address 2003:BABA:506:B::2/64
+ ipv6 address FE80::B:2 link-local
+ no shutdown
+ exit
+
+# Interfaz LAN - RED DE SERVICIOS
+interface GigabitEthernet0/0
+ ipv6 address 2003:BABA:506:4::1/64
+ ipv6 address FE80::4:1 link-local
+ ipv6 dhcp server POOL-SERVICIOS
+ ipv6 nd managed-config-flag
+ no shutdown
+ exit
+
+# Interfaz LAN - RED DE PROFESORES
+interface GigabitEthernet0/1
+ ipv6 address 2003:BABA:506:3::1/64
+ ipv6 address FE80::3:1 link-local
+ ipv6 dhcp server POOL-PROFE
+ ipv6 nd managed-config-flag
+ no shutdown
+ exit
+
+# Enrutamiento Estático
+ipv6 route 2003:BABA:506:1::/64 2003:BABA:506:B::1
+ipv6 route 2003:BABA:506:2::/64 2003:BABA:506:B::1
+ipv6 route 2003:BABA:506:A::/64 2003:BABA:506:B::1

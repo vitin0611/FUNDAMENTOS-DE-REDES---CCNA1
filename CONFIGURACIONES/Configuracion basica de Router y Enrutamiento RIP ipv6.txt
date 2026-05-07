@@ -1,0 +1,111 @@
+1..................
+
+enable
+conf t
+ipv6 unicast-routing
+hostname R1_NORTE
+
+interface GigabitEthernet0/0
+ ipv6 address FE80::1:1 link-local
+ ipv6 address 2003:CAFE:506:1::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface GigabitEthernet0/1
+ ipv6 address FE80::2:1 link-local
+ ipv6 address 2003:CAFE:506:2::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface Serial0/0/0
+ ipv6 address FE80::3:1 link-local
+ ipv6 address 2003:CAFE:506:3::1/64
+ ipv6 rip ITLA_RIP enable
+ clock rate 64000
+ no shutdown
+exit
+
+2....................
+
+enable
+conf t
+ipv6 unicast-routing
+hostname R2_CENTRO
+
+interface GigabitEthernet0/0
+ ipv6 address FE80::4:1 link-local
+ ipv6 address 2003:CAFE:506:4::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface GigabitEthernet0/1
+ ipv6 address FE80::5:1 link-local
+ ipv6 address 2003:CAFE:506:5::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface Serial0/0/0
+ ipv6 address FE80::3:2 link-local
+ ipv6 address 2003:CAFE:506:3::2/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface Serial0/0/1
+ ipv6 address FE80::6:1 link-local
+ ipv6 address 2003:CAFE:506:6::1/64
+ ipv6 rip ITLA_RIP enable
+ clock rate 64000
+ no shutdown
+exit
+
+3......................
+
+enable
+conf t
+ipv6 unicast-routing
+hostname R3_ESTE
+
+interface GigabitEthernet0/0
+ ipv6 address FE80::7:1 link-local
+ ipv6 address 2003:CAFE:506:7::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface GigabitEthernet0/1
+ ipv6 address FE80::8:1 link-local
+ ipv6 address 2003:CAFE:506:8::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface GigabitEthernet0/2
+ ipv6 address FE80::9:1 link-local
+ ipv6 address 2003:CAFE:506:9::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface Serial0/0/1
+ ipv6 address FE80::6:2 link-local
+ ipv6 address 2003:CAFE:506:6::2/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+exit
+
+4.............................
+
+enable
+conf t
+ipv6 unicast-routing
+hostname R4_SUR
+
+interface GigabitEthernet0/0
+ ipv6 address FE80::10:1 link-local
+ ipv6 address 2003:CAFE:506:10::1/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+
+interface GigabitEthernet0/2
+ ipv6 address FE80::9:2 link-local
+ ipv6 address 2003:CAFE:506:9::2/64
+ ipv6 rip ITLA_RIP enable
+ no shutdown
+exit

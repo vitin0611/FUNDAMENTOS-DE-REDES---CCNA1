@@ -1,0 +1,141 @@
+enable
+conf t
+hostname PARIS
+line vty 0 4
+password CISCOX
+LOGIN
+exit
+
+interface gigabitethernet 0/0
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+description conexión a la red-1
+
+interface s0/0/0
+ip address 192.168.11.1 255.255.255.0
+no shutdown
+description conexión a Francia
+
+router 2
+
+enable
+conf t
+hostname FRANCIA
+line vty 0 4
+password CISCOX
+LOGIN
+exit
+
+interface gigabitethernet 0/0
+ip address 192.168.12.1 255.255.255.0
+no shutdown
+description conexión a la red-3
+
+interface gigabitethernet 0/1
+ip address 192.168.13.1 255.255.255.0
+no shutdown
+description conexión a la red-4
+
+interface s0/0/0
+ip address 192.168.11.2 255.255.255.0
+no shutdown
+description conexión a PARIS
+
+interface s0/0/1
+ip address 192.168.14.1 255.255.255.0
+no shutdown
+description conexión a POLONIA
+
+router 3
+
+enable
+conf t
+hostname POLONIA
+line vty 0 4
+password CISCOX
+LOGIN
+exit
+
+interface gigabitethernet 0/0
+ip address 192.168.15.1 255.255.255.0
+no shutdown
+description conexión a la red-6
+
+interface s0/0/1
+ip address 192.168.14.2 255.255.255.0
+no shutdown
+description conexión a FRANCIA
+
+interface s0/0/0
+ip address 192.168.16.1 255.255.255.0
+no shutdown
+description conexión a ALEMNANIA
+
+interface s0/1/0
+ip address 192.168.17.1 255.255.255.0
+no shutdown
+description conexión a SUIZA
+
+
+
+router 4
+
+enable
+conf t
+hostname ALEMANIA
+line vty 0 4
+password CISCOX
+LOGIN
+exit
+
+interface gigabitethernet 0/0
+ip address 192.168.18.1 255.255.255.0
+no shutdown
+description conexión a la red-9
+
+interface s0/0/0
+ip address 192.168.16.2 255.255.255.0
+no shutdown
+description conexión a POLONIA
+
+router 5
+
+enable
+conf t
+hostname SUIZA
+line vty 0 4
+password CISCOX
+LOGIN
+exit
+
+interface gigabitethernet 0/0
+ip address 192.168.19.1 255.255.255.0
+no shutdown
+description conexión a la red-10
+
+interface gigabitethernet 0/1
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+description conexión a la red-11
+
+interface s0/1/0
+ip address 192.168.17.2 255.255.255.0
+no shutdown
+description conexión a POLONIA.
+
+
+
+
+enable
+conf t
+router rip
+
+version 2
+
+no auto-summary
+
+network 192.168.17.0
+network 192.168.19.0
+network 192.168.20.0
+
+do write

@@ -1,0 +1,23 @@
+enable
+conf t
+hostname SW-PISO4
+banner motd #ACCESO CONTROLADO MONITOREADO#
+line console 0
+password CISCO
+login
+exit
+line vty 0 4
+password CISCO
+LOGIN
+exit
+enable secret CLASS
+service password-encryption
+
+interface vlan1
+ip address 174.30.1.6 255.255.255.0
+no shutdown
+exit
+ip default-gateway 174.30.1.1
+
+exit
+copy running-config startup-config
