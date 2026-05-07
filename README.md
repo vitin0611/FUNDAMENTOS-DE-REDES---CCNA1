@@ -34,7 +34,5 @@ Centralizar todas las prácticas, proyectos, configuraciones y recursos desarrol
 ```bash
 📁 FUNDAMENTOS-DE-REDES-CCNA1
  ├── 📁 Practicas
- ├── 📁 Configuraciones
  ├── 📁 Documentacion
- ├── 📁 PacketTracer
  └── README.md
