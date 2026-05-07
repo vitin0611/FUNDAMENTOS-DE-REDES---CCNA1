@@ -1,0 +1,35 @@
+enable
+conf t
+hostname GATEWAY_05
+banner motd #ACCESO RESTRINGIDO Y CONTROLADO#
+line console 0
+password CISCO
+login
+exit
+line vty 0 4
+password CISCO
+LOGIN
+exit
+enable secret CLASS
+service password-encryption
+
+interface gigabitethernet 0/0
+ip address 172.30.11.1 255.255.255.0
+no shutdown
+description conexión a la red de estudiantes
+exit
+
+interface gigabitethernet 0/2
+ip address 172.30.12.1 255.255.255.0
+no shutdown
+description conexión a la red de vicerrectoria
+exit
+
+interface gigabitethernet 0/1
+ip address 172.30.13.1 255.255.255.0
+no shutdown
+description conexión a la red de departamento de becas
+end
+
+
+copy running-config startup-config
